@@ -93,4 +93,4 @@ public class MenuZTlemObrazu extends JFrame {
     }
 }
 
-//// zmiana
+//// zmiana bo to nie chce dzialac
