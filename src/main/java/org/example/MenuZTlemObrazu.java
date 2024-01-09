@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 public class MenuZTlemObrazu extends JFrame {
 
     public MenuZTlemObrazu() {
-        // Ustawienia okna
+        // Ustawienia okn
         setTitle("Bomberman");
         setSize(800, 800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
