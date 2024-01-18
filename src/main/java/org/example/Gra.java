@@ -36,7 +36,7 @@ public class Gra extends JPanel {
         przeciwnik3.rysuj(g);
         ty.rysuj(g);
 
-        // System.out.format("%s: %s [%04d, %04d]\n", Gra.ty.kolor, Gra.ty.status, Gra.ty.x, Gra.ty.y);
+         //System.out.format("%s: %s [%04d, %04d]\n", Gra.ty.kolor, Gra.ty.status, Gra.ty.x, Gra.ty.y);
         Toolkit.getDefaultToolkit().sync();
     }
 

@@ -65,12 +65,12 @@ class RzutnikAktualizacjiMapy extends Thread {
                 }
 
                 // efekty eksplozji
-                new Rzucacz("bomba-ikona", Stale.indeksEksplozji, Stale.CZESTOTLIWOSC_AKTUALIZACJI_OGNIA, w, k).start();
+                new Rzucacz("centrum-wybuchu", Stale.indeksEksplozji, Stale.CZESTOTLIWOSC_AKTUALIZACJI_OGNIA, w, k).start();
                 sprawdzCzyEksplozjaZabilaKogos(w, k);
 
                 // poniżej
                 if (Serwer.mapa[w+1][k].obraz.equals("podloga-1")) {
-                    new Rzucacz("dol-eksplozji", Stale.indeksEksplozji, Stale.CZESTOTLIWOSC_AKTUALIZACJI_OGNIA, w+1, k).start();
+                    new Rzucacz("dol-wybuchu", Stale.indeksEksplozji, Stale.CZESTOTLIWOSC_AKTUALIZACJI_OGNIA, w+1, k).start();
                     sprawdzCzyEksplozjaZabilaKogos(w+1, k);
                 }
                 else if (Serwer.mapa[w+1][k].obraz.contains("blok"))
@@ -86,7 +86,7 @@ class RzutnikAktualizacjiMapy extends Thread {
 
                 // powyżej
                 if (Serwer.mapa[w-1][k].obraz.equals("podloga-1")) {
-                    new Rzucacz("gora-eksplozji", Stale.indeksEksplozji, Stale.CZESTOTLIWOSC_AKTUALIZACJI_OGNIA, w-1, k).start();
+                    new Rzucacz("gora-wybuchu", Stale.indeksEksplozji, Stale.CZESTOTLIWOSC_AKTUALIZACJI_OGNIA, w-1, k).start();
                     sprawdzCzyEksplozjaZabilaKogos(w-1, k);
                 }
                 else if (Serwer.mapa[w-1][k].obraz.contains("blok"))
@@ -94,7 +94,7 @@ class RzutnikAktualizacjiMapy extends Thread {
 
                 // po lewej
                 if (Serwer.mapa[w][k-1].obraz.equals("podloga-1")) {
-                    new Rzucacz("lewo-eksplozji", Stale.indeksEksplozji, Stale.CZESTOTLIWOSC_AKTUALIZACJI_OGNIA, w, k-1).start();
+                    new Rzucacz("lewo-wybuchu", Stale.indeksEksplozji, Stale.CZESTOTLIWOSC_AKTUALIZACJI_OGNIA, w, k-1).start();
                     sprawdzCzyEksplozjaZabilaKogos(w, k-1);
                 }
                 else if (Serwer.mapa[w][k-1].obraz.contains("blok"))
