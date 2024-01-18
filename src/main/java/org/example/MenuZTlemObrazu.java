@@ -8,19 +8,15 @@ import java.awt.event.ActionListener;
 public class MenuZTlemObrazu extends JFrame {
 
     public MenuZTlemObrazu() {
-        // Ustawienia
         setTitle("Bomberman");
         setSize(800, 800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // Ustawienie tła jako obrazu
         setContentPane(new JLabel(new ImageIcon("png\\zdj.png")));
 
-        // Układ z GridBagLayout
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
 
-        // Dodanie przycisku "Graj"
         JButton grajButton = utworzPrzycisk("Graj");
         grajButton.addActionListener(new ActionListener() {
             @Override
@@ -93,4 +89,3 @@ public class MenuZTlemObrazu extends JFrame {
     }
 }
 
-//// zmiana bo to nie chce dzialac
