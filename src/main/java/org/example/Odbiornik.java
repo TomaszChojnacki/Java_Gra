@@ -44,3 +44,4 @@ public class Odbiornik extends Thread {
         Klient.wejscie.close();
     }
 }
+

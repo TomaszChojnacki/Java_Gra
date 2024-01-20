@@ -69,3 +69,4 @@ class ZmieniaczStatusu extends Thread {
         indeks = 0;
     }
 }
+

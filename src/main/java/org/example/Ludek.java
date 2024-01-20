@@ -9,7 +9,7 @@ import javax.imageio.ImageIO;
 public class Ludek {
     final static String koloryPostaci[] = {
             "czarny",
-            "rozowy",
+            "bialy",
             "zielony",
             "zolty"
     };
@@ -40,6 +40,8 @@ public class Ludek {
             "lewo-0", "lewo-1", "lewo-2", "lewo-3", "lewo-4", "lewo-5", "lewo-6", "lewo-7",
             "martwy-0", "martwy-1", "martwy-2", "martwy-3", "martwy-4",
             "prawo-0", "prawo-1", "prawo-2", "prawo-3", "prawo-4", "prawo-5", "prawo-6", "prawo-7",
+            "uhu-0", "uhu-1", "uhu-2", "uhu-3",
+            "wygrana-0", "wygrana-1", "wygrana-2", "wygrana-3", "wygrana-4"
     };
 
     final static Hashtable<String, Integer> maxPetlaStatusu = new Hashtable<String, Integer>();
@@ -50,6 +52,8 @@ public class Ludek {
         maxPetlaStatusu.put("lewo", 8);
         maxPetlaStatusu.put("martwy", 5);
         maxPetlaStatusu.put("prawo", 8);
+        maxPetlaStatusu.put("uhu", 4);
+        maxPetlaStatusu.put("wygrana", 5);
     }
 
     static void zaladujObrazy() {
