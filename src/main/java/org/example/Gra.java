@@ -15,16 +15,16 @@ public class Gra extends JPanel {
         try {
             System.out.print("Inicjalizacja graczy...");
             ty = new Gracz(Klient.id, this);
-            przeciwnik1 = new Gracz((Klient.id+1)%Stale.ILU_GRACZY, this);
-            przeciwnik2 = new Gracz((Klient.id+2)%Stale.ILU_GRACZY, this);
-            przeciwnik3 = new Gracz((Klient.id+3)%Stale.ILU_GRACZY, this);
+            przeciwnik1 = new Gracz((Klient.id + 1) % Stale.ILU_GRACZY, this);
+            przeciwnik2 = new Gracz((Klient.id + 2) % Stale.ILU_GRACZY, this);
+            przeciwnik3 = new Gracz((Klient.id + 3) % Stale.ILU_GRACZY, this);
         } catch (InterruptedException e) {
             System.out.println(" błąd: " + e + "\n");
             System.exit(1);
         }
         System.out.print(" ok\n");
 
-        System.out.println("Mój gracz: " + Ludek.koloryPostaci[Klient.id]);
+
     }
 
     // rysuje komponenty, wywoływane przez paint() i repaint()
@@ -36,7 +36,7 @@ public class Gra extends JPanel {
         przeciwnik3.rysuj(g);
         ty.rysuj(g);
 
-         //System.out.format("%s: %s [%04d, %04d]\n", Gra.ty.kolor, Gra.ty.status, Gra.ty.x, Gra.ty.y);
+        //System.out.format("%s: %s [%04d, %04d]\n", Gra.ty.kolor, Gra.ty.status, Gra.ty.x, Gra.ty.y);
         Toolkit.getDefaultToolkit().sync();
     }
 
@@ -54,5 +54,6 @@ public class Gra extends JPanel {
         Klient.mapa[l][c].obraz = slowoKluczowe;
     }
 }
+
 
 

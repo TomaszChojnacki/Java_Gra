@@ -18,10 +18,10 @@ class RzutnikKoordynatow extends Thread {
 
         while (true) {
             if (gora || dol || prawo || lewo) {
-                if (gora)           nowyY = Serwer.gracz[id].y - Stale.ZMIANA_ROZMIARU;
-                else if (dol)    nowyY = Serwer.gracz[id].y + Stale.ZMIANA_ROZMIARU;
-                else if (prawo)   nowyX = Serwer.gracz[id].x + Stale.ZMIANA_ROZMIARU;
-                else if (lewo)    nowyX = Serwer.gracz[id].x - Stale.ZMIANA_ROZMIARU;
+                if (gora) nowyY = Serwer.gracz[id].y - Stale.ZMIANA_ROZMIARU;
+                else if (dol) nowyY = Serwer.gracz[id].y + Stale.ZMIANA_ROZMIARU;
+                else if (prawo) nowyX = Serwer.gracz[id].x + Stale.ZMIANA_ROZMIARU;
+                else if (lewo) nowyX = Serwer.gracz[id].x - Stale.ZMIANA_ROZMIARU;
 
                 if (wspolrzedneSaWazne(nowyX, nowyY)) {
                     MenadzerKlienta.wyslijDoWszystkichKlientow(id + " noweKoordynaty " + nowyX + " " + nowyY);
@@ -34,17 +34,22 @@ class RzutnikKoordynatow extends Thread {
                 }
                 try {
                     sleep(Stale.CZESTOTLIWOSC_AKTUALIZACJI_WSPOLRZEDNYCH);
-                } catch (InterruptedException e) {}
+                } catch (InterruptedException e) {
+                }
             }
-            try {sleep(0);} catch (InterruptedException e) {}
+            try {
+                sleep(0);
+            } catch (InterruptedException e) {
+            }
         }
     }
 
     int getKolumnaMapy(int x) {
-        return x/Stale.ROZMIAR_SPRITE_MAPY;
+        return x / Stale.ROZMIAR_SPRITE_MAPY;
     }
+
     int getWierszMapy(int y) {
-        return y/Stale.ROZMIAR_SPRITE_MAPY;
+        return y / Stale.ROZMIAR_SPRITE_MAPY;
     }
 
     // sprawdza, nad którymi sprite'ami mapy znajduje się gracz i czy są one ważne
@@ -53,8 +58,8 @@ class RzutnikKoordynatow extends Thread {
             return false;
 
         // sprawdza, czy gracz wszedł w ogień (współrzędne środka ciała)
-        int xCialo = nowyX + Stale.SZEROKOSC_SPRITE_GRACZA/2;
-        int yCialo = nowyY + 2*Stale.WYSOKOSC_SPRITE_GRACZA/3;
+        int xCialo = nowyX + Stale.SZEROKOSC_SPRITE_GRACZA / 2;
+        int yCialo = nowyY + 2 * Stale.WYSOKOSC_SPRITE_GRACZA / 3;
 
         if (Serwer.mapa[getWierszMapy(yCialo)][getKolumnaMapy(xCialo)].obraz.contains("eksplozja")) {
             Serwer.gracz[id].zywy = false;
@@ -135,19 +140,23 @@ class RzutnikKoordynatow extends Thread {
     void klawiszWcisniety(int kodKlawisza) {
         switch (kodKlawisza) {
             case KeyEvent.VK_W:
-                gora = true; dol = prawo = lewo = false;
+                gora = true;
+                dol = prawo = lewo = false;
                 MenadzerKlienta.wyslijDoWszystkichKlientow(this.id + " nowyStatus gora");
                 break;
             case KeyEvent.VK_S:
-                dol = true; gora = prawo = lewo = false;
+                dol = true;
+                gora = prawo = lewo = false;
                 MenadzerKlienta.wyslijDoWszystkichKlientow(this.id + " nowyStatus dol");
                 break;
             case KeyEvent.VK_D:
-                prawo = true; gora = dol = lewo = false;
+                prawo = true;
+                gora = dol = lewo = false;
                 MenadzerKlienta.wyslijDoWszystkichKlientow(this.id + " nowyStatus prawo");
                 break;
             case KeyEvent.VK_A:
-                lewo = true; gora = dol = prawo = false;
+                lewo = true;
+                gora = dol = prawo = false;
                 MenadzerKlienta.wyslijDoWszystkichKlientow(this.id + " nowyStatus lewo");
                 break;
         }
@@ -159,13 +168,20 @@ class RzutnikKoordynatow extends Thread {
 
         MenadzerKlienta.wyslijDoWszystkichKlientow(this.id + " zatrzymajAktualizacjeStatusu");
         switch (kodKlawisza) {
-            case KeyEvent.VK_W: gora = false; break;
-            case KeyEvent.VK_S: dol = false; break;
-            case KeyEvent.VK_D: prawo = false; break;
-            case KeyEvent.VK_A: lewo = false; break;
+            case KeyEvent.VK_W:
+                gora = false;
+                break;
+            case KeyEvent.VK_S:
+                dol = false;
+                break;
+            case KeyEvent.VK_D:
+                prawo = false;
+                break;
+            case KeyEvent.VK_A:
+                lewo = false;
+                break;
         }
     }
 }
-
 
 

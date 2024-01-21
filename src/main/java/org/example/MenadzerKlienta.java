@@ -46,7 +46,7 @@ class MenadzerKlienta extends Thread {
         wyslijPoczatkoweUstawienia(); // wysyła jedną linię
 
         // powiadamia klientów już zalogowanych
-        for (PrintStream wyjscieKlienta: listaWyjscKlientow)
+        for (PrintStream wyjscieKlienta : listaWyjscKlientow)
             if (wyjscieKlienta != this.wyjscie)
                 wyjscieKlienta.println(id + " graczDolaczyl");
     }
@@ -57,11 +57,9 @@ class MenadzerKlienta extends Thread {
 
             if (str[0].equals("klawiszWcisniety") && Serwer.gracz[id].zywy) {
                 rk.klawiszWcisniety(Integer.parseInt(str[1]));
-            }
-            else if (str[0].equals("klawiszZwolniony") && Serwer.gracz[id].zywy) {
+            } else if (str[0].equals("klawiszZwolniony") && Serwer.gracz[id].zywy) {
                 rk.klawiszZwolniony(Integer.parseInt(str[1]));
-            }
-            else if (str[0].equals("wcisnietoSpacje") && Serwer.gracz[id].liczbaBomb >= 1) {
+            } else if (str[0].equals("wcisnietoSpacje") && Serwer.gracz[id].liczbaBomb >= 1) {
                 Serwer.gracz[id].liczbaBomb--;
                 ram.ustawBombeZasadzona(Integer.parseInt(str[1]), Integer.parseInt(str[2]));
             }

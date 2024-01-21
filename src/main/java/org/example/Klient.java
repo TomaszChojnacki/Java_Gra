@@ -27,12 +27,10 @@ public class Klient {
             this.gniazdo = new Socket(host, port);
             wyjscie = new PrintStream(gniazdo.getOutputStream(), true);  // do wysyłania do serwera
             wejscie = new Scanner(gniazdo.getInputStream()); // do odbierania od serwera
-        }
-        catch (UnknownHostException e) {
+        } catch (UnknownHostException e) {
             System.out.println(" błąd: " + e + "\n");
             System.exit(1);
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             System.out.println(" błąd: " + e + "\n");
             System.exit(1);
         }
@@ -72,7 +70,7 @@ class Okno extends JFrame {
         Ludek.zaladujObrazy();
         Ludek.ustawMaxPetlaStatusu();
 
-        add(new Gra(Stale.KOLUMNY*Stale.ROZMIAR_SPRITE_MAPY, Stale.WIERSZE*Stale.ROZMIAR_SPRITE_MAPY));
+        add(new Gra(Stale.KOLUMNY * Stale.ROZMIAR_SPRITE_MAPY, Stale.WIERSZE * Stale.ROZMIAR_SPRITE_MAPY));
         setTitle("bomberman");
         pack();
         setVisible(true);

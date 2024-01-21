@@ -14,8 +14,8 @@ class RzutnikAktualizacjiMapy extends Thread {
         x += Stale.SZEROKOSC_SPRITE_GRACZA / 2;
         y += 2 * Stale.WYSOKOSC_SPRITE_GRACZA / 3;
 
-        this.k = x/Stale.ROZMIAR_SPRITE_MAPY;
-        this.w = y/Stale.ROZMIAR_SPRITE_MAPY;
+        this.k = x / Stale.ROZMIAR_SPRITE_MAPY;
+        this.w = y / Stale.ROZMIAR_SPRITE_MAPY;
 
         this.bombaZasadzona = true;
     }
@@ -29,6 +29,7 @@ class RzutnikAktualizacjiMapy extends Thread {
     int getKolumnaMapy(int x) {
         return x / Stale.ROZMIAR_SPRITE_MAPY;
     }
+
     int getWierszMapy(int y) {
         return y / Stale.ROZMIAR_SPRITE_MAPY;
     }
@@ -57,11 +58,12 @@ class RzutnikAktualizacjiMapy extends Thread {
             if (bombaZasadzona) {
                 bombaZasadzona = false;
 
-                for (String indeks: Stale.indeksBombaZasadzona) {
+                for (String indeks : Stale.indeksBombaZasadzona) {
                     zmienMape("bomba-zasadzona-" + indeks, w, k);
                     try {
                         sleep(Stale.CZESTOTLIWOSC_AKTUALIZACJI_BOMBY);
-                    } catch (InterruptedException e) {}
+                    } catch (InterruptedException e) {
+                    }
                 }
 
                 // efekty eksplozji
@@ -69,40 +71,39 @@ class RzutnikAktualizacjiMapy extends Thread {
                 sprawdzCzyEksplozjaZabilaKogos(w, k);
 
                 // poniżej
-                if (Serwer.mapa[w+1][k].obraz.equals("podloga-1")) {
-                    new Rzucacz("dol-wybuchu", Stale.indeksEksplozji, Stale.CZESTOTLIWOSC_AKTUALIZACJI_OGNIA, w+1, k).start();
-                    sprawdzCzyEksplozjaZabilaKogos(w+1, k);
-                }
-                else if (Serwer.mapa[w+1][k].obraz.contains("blok"))
-                    new Rzucacz("blok-w-ogniu", Stale.indeksBlokWPlomieniach, Stale.CZESTOTLIWOSC_AKTUALIZACJI_BLOKU, w+1, k).start();
+                if (Serwer.mapa[w + 1][k].obraz.equals("podloga-1")) {
+                    new Rzucacz("dol-wybuchu", Stale.indeksEksplozji, Stale.CZESTOTLIWOSC_AKTUALIZACJI_OGNIA, w + 1, k).start();
+                    sprawdzCzyEksplozjaZabilaKogos(w + 1, k);
+                } else if (Serwer.mapa[w + 1][k].obraz.contains("blok"))
+                    new Rzucacz("blok-w-ogniu", Stale.indeksBlokWPlomieniach, Stale.CZESTOTLIWOSC_AKTUALIZACJI_BLOKU, w + 1, k).start();
 
                 // po prawej
-                if (Serwer.mapa[w][k+1].obraz.equals("podloga-1")) {
-                    new Rzucacz("prawo-wybuchu", Stale.indeksEksplozji, Stale.CZESTOTLIWOSC_AKTUALIZACJI_OGNIA, w, k+1).start();
-                    sprawdzCzyEksplozjaZabilaKogos(w, k+1);
-                }
-                else if (Serwer.mapa[w][k+1].obraz.contains("blok"))
-                    new Rzucacz("blok-w-ogniu", Stale.indeksBlokWPlomieniach, Stale.CZESTOTLIWOSC_AKTUALIZACJI_BLOKU, w, k+1).start();
+                if (Serwer.mapa[w][k + 1].obraz.equals("podloga-1")) {
+                    new Rzucacz("prawo-wybuchu", Stale.indeksEksplozji, Stale.CZESTOTLIWOSC_AKTUALIZACJI_OGNIA, w, k + 1).start();
+                    sprawdzCzyEksplozjaZabilaKogos(w, k + 1);
+                } else if (Serwer.mapa[w][k + 1].obraz.contains("blok"))
+                    new Rzucacz("blok-w-ogniu", Stale.indeksBlokWPlomieniach, Stale.CZESTOTLIWOSC_AKTUALIZACJI_BLOKU, w, k + 1).start();
 
                 // powyżej
-                if (Serwer.mapa[w-1][k].obraz.equals("podloga-1")) {
-                    new Rzucacz("gora-wybuchu", Stale.indeksEksplozji, Stale.CZESTOTLIWOSC_AKTUALIZACJI_OGNIA, w-1, k).start();
-                    sprawdzCzyEksplozjaZabilaKogos(w-1, k);
-                }
-                else if (Serwer.mapa[w-1][k].obraz.contains("blok"))
-                    new Rzucacz("blok-w-ogniu", Stale.indeksBlokWPlomieniach, Stale.CZESTOTLIWOSC_AKTUALIZACJI_BLOKU, w-1, k).start();
+                if (Serwer.mapa[w - 1][k].obraz.equals("podloga-1")) {
+                    new Rzucacz("gora-wybuchu", Stale.indeksEksplozji, Stale.CZESTOTLIWOSC_AKTUALIZACJI_OGNIA, w - 1, k).start();
+                    sprawdzCzyEksplozjaZabilaKogos(w - 1, k);
+                } else if (Serwer.mapa[w - 1][k].obraz.contains("blok"))
+                    new Rzucacz("blok-w-ogniu", Stale.indeksBlokWPlomieniach, Stale.CZESTOTLIWOSC_AKTUALIZACJI_BLOKU, w - 1, k).start();
 
                 // po lewej
-                if (Serwer.mapa[w][k-1].obraz.equals("podloga-1")) {
-                    new Rzucacz("lewo-wybuchu", Stale.indeksEksplozji, Stale.CZESTOTLIWOSC_AKTUALIZACJI_OGNIA, w, k-1).start();
-                    sprawdzCzyEksplozjaZabilaKogos(w, k-1);
-                }
-                else if (Serwer.mapa[w][k-1].obraz.contains("blok"))
-                    new Rzucacz("blok-w-ogniu", Stale.indeksBlokWPlomieniach, Stale.CZESTOTLIWOSC_AKTUALIZACJI_BLOKU, w, k-1).start();
+                if (Serwer.mapa[w][k - 1].obraz.equals("podloga-1")) {
+                    new Rzucacz("lewo-wybuchu", Stale.indeksEksplozji, Stale.CZESTOTLIWOSC_AKTUALIZACJI_OGNIA, w, k - 1).start();
+                    sprawdzCzyEksplozjaZabilaKogos(w, k - 1);
+                } else if (Serwer.mapa[w][k - 1].obraz.contains("blok"))
+                    new Rzucacz("blok-w-ogniu", Stale.indeksBlokWPlomieniach, Stale.CZESTOTLIWOSC_AKTUALIZACJI_BLOKU, w, k - 1).start();
 
                 Serwer.gracz[id].liczbaBomb++; // zwolnienie bomby
             }
-            try {sleep(0);} catch (InterruptedException e) {}
+            try {
+                sleep(0);
+            } catch (InterruptedException e) {
+            }
         }
     }
 }
@@ -126,11 +127,11 @@ class Rzucacz extends Thread {
             RzutnikAktualizacjiMapy.zmienMape(slowoKlucz + "-" + i, w, k);
             try {
                 sleep(opoznienie);
-            } catch (InterruptedException e) {}
+            } catch (InterruptedException e) {
+            }
         }
         // sytuacja po eksplozji
         RzutnikAktualizacjiMapy.zmienMape("podloga-1", w, k);
     }
 }
-
 

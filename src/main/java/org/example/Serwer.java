@@ -33,7 +33,7 @@ class Serwer {
             ss = new ServerSocket(numerPortu); // socket nasłuchuje portu
             System.out.print(" ok\n");
 
-            for (int id = 0; !zalogowaniPelni(); id = (++id)%Stale.ILU_GRACZY)
+            for (int id = 0; !zalogowaniPelni(); id = (++id) % Stale.ILU_GRACZY)
                 if (!gracz[id].zalogowany) {
                     Socket gniazdoKlienta = ss.accept();
                     new MenadzerKlienta(gniazdoKlienta, id).start();
@@ -116,5 +116,4 @@ class Serwer {
         new Serwer(8383);
     }
 }
-
 

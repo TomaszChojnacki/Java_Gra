@@ -1,5 +1,7 @@
 package org.example;
 
+import org.example.images.KoloryPostaci;
+
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
@@ -7,27 +9,21 @@ import java.util.Hashtable;
 import javax.imageio.ImageIO;
 
 public class Ludek {
-    final static String koloryPostaci[] = {
-            "czarny",
-            "bialy",
-            "zielony",
-            "zolty"
-    };
 
     final static Hashtable<String, Image> ht = new Hashtable<String, Image>();
     //nie jest w kolejności spritesheet
     final static String kluczoweSlowaMapy[] = {
             "blok",
             "podloga-1", "podloga-2",
-            "bomba-zasadzona-1","bomba-zasadzona-2","bomba-zasadzona-3",
+            "bomba-zasadzona-1", "bomba-zasadzona-2", "bomba-zasadzona-3",
             "centrum-wybuchu-1", "centrum-wybuchu-2", "centrum-wybuchu-3", "centrum-wybuchu-4", "centrum-wybuchu-5",
             "dol-wybuchu-1", "dol-wybuchu-2", "dol-wybuchu-3", "dol-wybuchu-4", "dol-wybuchu-5",
             "blok-w-ogniu-1", "blok-w-ogniu-2", "blok-w-ogniu-3", "blok-w-ogniu-4", "blok-w-ogniu-5", "blok-w-ogniu-6",
             "gora-wybuchu-1", "gora-wybuchu-2", "gora-wybuchu-3", "gora-wybuchu-4", "gora-wybuchu-5",
             "lewo-wybuchu-1", "lewo-wybuchu-2", "lewo-wybuchu-3", "lewo-wybuchu-4", "lewo-wybuchu-5",
-            "bomba-zasadzona-czerwona-1","bomba-zasadzona-czerwona-2","bomba-zasadzona-czerwona-3",
+            "bomba-zasadzona-czerwona-1", "bomba-zasadzona-czerwona-2", "bomba-zasadzona-czerwona-3",
             "prawo-wybuchu-1", "prawo-wybuchu-2", "prawo-wybuchu-3", "prawo-wybuchu-4", "prawo-wybuchu-5",
-            "sciana-dol-lewo", "sciana-dol-prawo", "sciana-gora-lewo", "sciana-gora-prawo","sciana-srodek",
+            "sciana-dol-lewo", "sciana-dol-prawo", "sciana-gora-lewo", "sciana-gora-prawo", "sciana-srodek",
             "srodek-horyzontalny-wybuchu-1", "srodek-horyzontalny-wybuchu-2", "srodek-horyzontalny-wybuchu-3", "srodek-horyzontalny-wybuchu-4", "srodek-horyzontalny-wybuchu-5",
             "srodek-pionowy-wybuchu-1", "srodek-pionowy-wybuchu-2", "srodek-pionowy-wybuchu-3", "srodek-pionowy-wybuchu-4", "srodek-pionowy-wybuchu-5",
             "tlo"
@@ -45,6 +41,7 @@ public class Ludek {
     };
 
     final static Hashtable<String, Integer> maxPetlaStatusu = new Hashtable<String, Integer>();
+
     static void ustawMaxPetlaStatusu() {
         maxPetlaStatusu.put("czekaj", 5);
         maxPetlaStatusu.put("dol", 8);
@@ -60,11 +57,12 @@ public class Ludek {
         try {
             System.out.print("Ladowanie obrazow...");
             for (String kluczoweSlowo : kluczoweSlowaMapy)
-                ht.put(kluczoweSlowo, ImageIO.read(new File("src/main/java/org/example/images/map/basic/"+kluczoweSlowo+".png")));
+                ht.put(kluczoweSlowo, ImageIO.read(new File("src/main/java/org/example/images/map/basic/" + kluczoweSlowo + ".png")));
 
-            for (String kolor : koloryPostaci)
+
+            for (KoloryPostaci kolor : KoloryPostaci.values())
                 for (String kluczoweSlowo : kluczoweSlowaPostaci)
-                    ht.put(kolor+"/"+kluczoweSlowo, ImageIO.read(new File("src/main/java/org/example/images/person/"+kolor+"/"+kluczoweSlowo+".png")));
+                    ht.put(kolor + "/" + kluczoweSlowo, ImageIO.read(new File("src/main/java/org/example/images/person/" + kolor + "/" + kluczoweSlowo + ".png")));
         } catch (IOException e) {
             System.out.print(" blad!\n");
             System.exit(1);

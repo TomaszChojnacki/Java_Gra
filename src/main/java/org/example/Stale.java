@@ -22,16 +22,9 @@ interface Stale {
     final static int CZESTOTLIWOSC_AKTUALIZACJI_STATUSU_GRACZA = 90;
     final static int CZESTOTLIWOSC_AKTUALIZACJI_WSPOLRZEDNYCH = 27;
 
-    final static String indeksBombaZasadzona[] = {
-            "1", "2", "3", "2", "1", "2", "3", "2", "1", "2", "3", "2", "1", "2",
-            "czerwona-3", "czerwona-2", "czerwona-1", "czerwona-2", "czerwona-3", "czerwona-2", "czerwona-3", "czerwona-2", "czerwona-3", "czerwona-2", "czerwona-3"
-    };
-    final static String indeksEksplozji[] = {
-            "1", "2", "3", "4", "5", "4", "3", "4", "5", "4", "3", "4", "5", "4", "3", "4", "5", "4", "3", "2", "1"
-    };
-    final static String indeksBlokWPlomieniach[] = {
-            "1", "2", "1", "2", "1", "2", "3", "4", "5", "6"
-    };
+    final static String indeksBombaZasadzona[] = {"1", "2", "3", "2", "1", "2", "3", "2", "1", "2", "3", "2", "1", "2", "czerwona-3", "czerwona-2", "czerwona-1", "czerwona-2", "czerwona-3", "czerwona-2", "czerwona-3", "czerwona-2", "czerwona-3", "czerwona-2", "czerwona-3"};
+    final static String indeksEksplozji[] = {"1", "2", "3", "4", "5", "4", "3", "4", "5", "4", "3", "4", "5", "4", "3", "4", "5", "4", "3", "2", "1"};
+    final static String indeksBlokWPlomieniach[] = {"1", "2", "1", "2", "1", "2", "3", "4", "5", "6"};
 }
 
 class Koordynaty {
@@ -49,4 +42,3 @@ class Koordynaty {
         this.obraz = obraz;
     }
 }
-

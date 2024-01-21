@@ -28,7 +28,7 @@ public class MenuZTlemObrazu extends JFrame {
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.anchor = GridBagConstraints.WEST;
-        gbc.insets = new Insets( 0, -350, 0, 0);  // Ustawienie przycisku "Graj" na 1/4 wysokości ekranu
+        gbc.insets = new Insets(0, -350, 0, 0);  // Ustawienie przycisku "Graj" na 1/4 wysokości ekranu
         add(grajButton, gbc);
 
         JButton informacjeButton = utworzPrzycisk("Informacje");

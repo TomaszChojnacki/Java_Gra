@@ -25,4 +25,3 @@ public class Nadawca extends KeyAdapter {
     }
 }
 
-
