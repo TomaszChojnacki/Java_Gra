@@ -11,8 +11,12 @@ import java.util.stream.Collectors;
 
 @Log4j2
 public class SqlService {
+
+    // Metoda do wstawiania obiektu do bazy danych
     protected static void insert(Persistable persistableObject) {
         try (Connection conn = getConnection()) {
+
+            // Tworzenie zapytania SQL na podstawie nazw pól i wartości obiektu
             String tableName = persistableObject.getClass().getSimpleName().toLowerCase();
             StringBuilder columnNames = new StringBuilder();
             StringBuilder placeholders = new StringBuilder();
@@ -24,14 +28,19 @@ public class SqlService {
                 values.add(field.get(persistableObject));
 
             }
+
+            // Usunięcie ostatniego przecinka z listy nazw kolumn i symboli zastępczych
             columnNames.setLength(columnNames.length() - 2);
             placeholders.setLength(placeholders.length() - 2);
 
             String sql = "INSERT INTO " + tableName + " (" + columnNames + ") VALUES (" + placeholders + ")";
-            log.info(sql);
+            log.info(sql);  // Logowanie zapytania SQL
 
+            // Wykonanie zapytania SQL
             try (PreparedStatement statement = conn.prepareStatement(sql)) {
                 for (int i = 0; i < values.size(); i++) {
+
+                    // Obsługa różnych typów wartości
                     if (values.get(i) instanceof Object[]) {
                         statement.setArray(i + 1, conn.createArrayOf("VARCHAR", (Object[]) values.get(i)));
                     } else {
@@ -41,12 +50,10 @@ public class SqlService {
                 statement.executeUpdate();
             }
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.error(e.getMessage()); // Zapisanie do logu gdy wywali blad "napisac zeby do pliku"
             e.printStackTrace();
         }
     }
-
-
 
 
     public static void update(Persistable persistable) {
@@ -89,6 +96,7 @@ public class SqlService {
         }
     }
 
+    // Metoda do nawiązywania połączenia z bazą danych
     public static Connection getConnection() throws SQLException {
         String host = System.getenv("DB_HOST");
         String port = System.getenv("DB_PORT");

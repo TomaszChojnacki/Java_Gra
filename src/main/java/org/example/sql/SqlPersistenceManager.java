@@ -2,6 +2,8 @@ package org.example.sql;
 
 import java.util.List;
 
+// rozwojowe nie dziala obecnie
+
 public class SqlPersistenceManager  {
 
     public void insert(Persistable persistable) {

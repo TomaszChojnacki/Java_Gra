@@ -4,35 +4,26 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-class DaneGracza {
-    boolean zalogowany, zywy;
-    int x, y; // aktualne współrzędne
-    int liczbaBomb;
-
-    DaneGracza(int x, int y) {
-        this.x = x;
-        this.y = y;
-        this.zalogowany = false;
-        this.zywy = false;
-        this.liczbaBomb = 1; // dla 2 bomb potrzebne jest obsłużenie każdej bomby w osobnym wątku
-    }
-}
-
 class Serwer {
+    // Deklaracja tablicy graczy i mapy gry
     static DaneGracza gracz[] = new DaneGracza[Stale.ILU_GRACZY];
     static Koordynaty mapa[][] = new Koordynaty[Stale.WIERSZE][Stale.KOLUMNY];
 
+    // Konstruktor serwera, który przyjmuje numer portu
     Serwer(int numerPortu) {
         ServerSocket ss;
 
+        // Inicjalizacja mapy i danych gracza
         ustawMape();
         ustawDaneGracza();
 
         try {
+            // Próba otwarcia portu i nasłuchiwania na nim
             System.out.print("Otwieranie portu " + numerPortu + "...");
             ss = new ServerSocket(numerPortu); // socket nasłuchuje portu
             System.out.print(" ok\n");
 
+            // Pętla akceptująca połączenia od klientów
             for (int id = 0; !zalogowaniPelni(); id = (++id) % Stale.ILU_GRACZY)
                 if (!gracz[id].zalogowany) {
                     Socket gniazdoKlienta = ss.accept();
@@ -40,11 +31,13 @@ class Serwer {
                 }
             // serwer nie kończy działania dopóki wątki klientów są aktywne
         } catch (IOException e) {
+            // Obsługa wyjątków związanych z błędami wejścia/wyjścia
             System.out.println(" błąd: " + e + "\n");
             System.exit(1);
         }
     }
 
+    // Metoda sprawdzająca, czy wszyscy gracze są zalogowani
     boolean zalogowaniPelni() {
         for (int i = 0; i < Stale.ILU_GRACZY; i++)
             if (!gracz[i].zalogowany)
@@ -52,12 +45,14 @@ class Serwer {
         return true;
     }
 
+    // Metoda ustawiająca mapę gry
     void ustawMape() {
+        // Ustawianie początkowych koordynatów i bloków
         for (int i = 0; i < Stale.WIERSZE; i++)
             for (int j = 0; j < Stale.KOLUMNY; j++)
                 mapa[i][j] = new Koordynaty(Stale.ROZMIAR_SPRITE_MAPY * j, Stale.ROZMIAR_SPRITE_MAPY * i, "blok");
 
-        // stałe ściany krawędzi
+        // ustawienie scian wedlug kolumn i wierszy
         for (int j = 1; j < Stale.KOLUMNY - 1; j++) {
             mapa[0][j].obraz = "sciana-srodek";
             mapa[Stale.WIERSZE - 1][j].obraz = "sciana-srodek";
@@ -71,13 +66,13 @@ class Serwer {
         mapa[Stale.WIERSZE - 1][0].obraz = "sciana-dol-lewo";
         mapa[Stale.WIERSZE - 1][Stale.KOLUMNY - 1].obraz = "sciana-dol-prawo";
 
-        // stałe ściany centralne
+        // ustawienie scaian na srodku ekranu
         for (int i = 2; i < Stale.WIERSZE - 2; i++)
             for (int j = 2; j < Stale.KOLUMNY - 2; j++)
                 if (i % 2 == 0 && j % 2 == 0)
                     mapa[i][j].obraz = "sciana-srodek";
 
-        // okolice spawnu
+        // ustawienie podlog po ktorych gracz moze chodzic
         mapa[1][1].obraz = "podloga-1";
         mapa[1][2].obraz = "podloga-1";
         mapa[2][1].obraz = "podloga-1";
@@ -92,6 +87,7 @@ class Serwer {
         mapa[1][Stale.KOLUMNY - 3].obraz = "podloga-1";
     }
 
+    // Metoda ustawiająca pozycje graczy na mapie
     void ustawDaneGracza() {
         gracz[0] = new DaneGracza(
                 mapa[1][1].x - Stale.VAR_X_SPRITE,
@@ -112,8 +108,9 @@ class Serwer {
         );
     }
 
+    // Główna metoda programu która uruchamia serwer na porcie 1234
     public static void main(String[] args) {
-        new Serwer(8383);
+        new Serwer(1234);
     }
 }
 

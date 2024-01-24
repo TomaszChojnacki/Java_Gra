@@ -14,27 +14,27 @@ import static org.example.security.Authorization.isValidLogin;
 public class Logowanie extends JFrame {
 
     public Logowanie() {
-
-        setTitle("MyStats - Ekran logowania");
+        setTitle("Logowanie");
         setSize(400, 300);
-        setResizable(false);
-        setLocationRelativeTo(null);
-        initComponents();
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setResizable(false);    // Zablokowanie zmiany rozmiaru okna
+        setLocationRelativeTo(null);    // Ustawianie okna na środku ekranu
+        initComponents();   // Inicjalizacja komponentów interfejsu
+        setDefaultCloseOperation(EXIT_ON_CLOSE);    // Ustawienie domyślnej operacji zamknięcia
     }
 
 
-    JPanel panel = new JPanel();
+    JPanel panel = new JPanel();    // Utworzenie panelu do umieszczenia komponentów
 
 
     public void initComponents() {
-
+        // Inicjalizacja komponentów interfejsu użytkownika
         JButton PrzyciskZamknij = new JButton("Zamknij");
         JButton PrzyciskOK = new JButton("OK");
         JLabel Login = new JLabel("Login: ");
         JLabel Haslo = new JLabel("Hasło: ");
-        JTextField LoginUzytkownika = new JTextField(6);
-        JPasswordField HasloUzytkownika = new JPasswordField(6);
+        JTextField LoginUzytkownika = new JTextField(6);// Pole tekstowe na login
+        JPasswordField HasloUzytkownika = new JPasswordField(6);// Pole na hasło
+        // Ustawianie rozmiarów i pozycji elementów
         PrzyciskZamknij.setSize(90, 30);
         PrzyciskOK.setSize(90, 30);
         Login.setSize(100, 30);
@@ -47,18 +47,21 @@ public class Logowanie extends JFrame {
         Haslo.setLocation(getWidth() - 300, getHeight() - 180);
         LoginUzytkownika.setLocation(getWidth() - 250, getHeight() - 220);
         HasloUzytkownika.setLocation(getWidth() - 250, getHeight() - 180);
-        panel.setLayout(null);
+        panel.setLayout(null);  // Ustawienie niestandardowego układu komponentów
+        // Dodanie komponentów do panelu
         panel.add(PrzyciskZamknij);
         panel.add(PrzyciskOK);
         panel.add(Login);
         panel.add(Haslo);
         panel.add(LoginUzytkownika);
         panel.add(HasloUzytkownika);
+        // Ustawienie podpowiedzi (tooltip) dla komponentów
         PrzyciskZamknij.setToolTipText("Zamknij Program.");
         PrzyciskOK.setToolTipText("Zaloguj się.");
         LoginUzytkownika.setToolTipText("Podaj swój login.");
         HasloUzytkownika.setToolTipText("Podaj swoje hasło.");
-        this.getContentPane().add(panel);
+        this.getContentPane().add(panel);   // Dodanie panelu do głównego kontenera okna
+        // Dodanie słuchaczy zdarzeń do przycisków
         PrzyciskZamknij.addActionListener(new ButtonZamknij());
         PrzyciskOK.addActionListener(new ActionListener() {
 
@@ -67,11 +70,14 @@ public class Logowanie extends JFrame {
                 String user = LoginUzytkownika.getText();
                 String pass = HasloUzytkownika.getText();
 
+                // Sprawdzenie poprawności logowania
                 if (isValidLogin(user, pass)) {
+                    // Logowanie zakończone sukcesem
                     System.out.print("zalogowano");
-                    new Klient("127.0.0.1", 8383);
+                    new Klient("127.0.0.1", 1234);
                     new Okno();
                 } else {
+                    // Logowanie nieudane
                     System.out.print("Nie znaleziono takiego  usera w bazie danych");
                 }
             }
@@ -80,10 +86,10 @@ public class Logowanie extends JFrame {
 
     }
 
-    //akcja przy przycisku zamknij
+    // Klasa obsługująca zdarzenie naciśnięcia przycisku "Zamknij"
     private class ButtonZamknij implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            System.exit(0);
+            System.exit(0);// Zamknięcie aplikacji
         }
     }
 }

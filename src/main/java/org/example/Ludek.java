@@ -11,7 +11,7 @@ import javax.imageio.ImageIO;
 public class Ludek {
 
     final static Hashtable<String, Image> ht = new Hashtable<String, Image>();
-    //nie jest w kolejności spritesheet
+    //nie jest w kolejności spritesheet jest wieksza zgodnosc z kolejnoscia w katalogu
     final static String kluczoweSlowaMapy[] = {
             "blok",
             "podloga-1", "podloga-2",
